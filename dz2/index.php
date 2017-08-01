@@ -1,14 +1,16 @@
 <?php
 require_once('functions.php');
 
-	task1("sdf sdfsf sdfsf sdfsf");
-	// task1("sdf sdfsf sdfsf sdfsf" true);
+	task1(['string1','string2','string3']);
+	echo task1(['string1','string2','string3'], true);
 
-	task2([1,2,3,4,5], '+');
+	echo "<br>";
+
+	task2([1,2,3,4,5], '-');
 
 echo "<br>";
 
-	task3('+',1,5,11);
+	task3('*',1,5,11);
 
 echo "<br>";
 

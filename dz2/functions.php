@@ -5,18 +5,20 @@
 
 function task1($arg = [], $par = false)
 {
-	$res = explode(' ', $arg);
-	if($par)
+	if($par == true)
 	{
-		$res = implode(' ', $res);
-		echo $res;
-
+		$res = '';
+		foreach ($arg as $data)
+		{
+			$res .=" $data";
+		}
+		return $res;
 	}
 	else
 	{
-		foreach ($res as $key => $value)
+		foreach ($arg as $data)
 		{
-			echo "<p>$value</p>";
+			echo "<p>$data</p>"; 
 		}
 	}
 }
@@ -85,9 +87,9 @@ function task2($arr, $operation)
 Пример вызова: calcEverything(‘+’, 1, 2, 3, 5.2);
 Результат: 1 + 2 + 3 + 5.2 = 11.2
 */
-function task3($arr)
+function task3()
 {
-    $numbers = array();
+    /*$numbers = array();
     	for ($i = 1; $i < func_num_args(); $i++)
 	    	{
 	        	$numbers[] = func_get_arg($i);
@@ -95,8 +97,60 @@ function task3($arr)
 
         if (is_array($numbers))
 	        {
-	        	task2($numbers, $arr);
-	        }
+	        	echo "<pre>";
+	        	print_r($numbers);
+	        	echo "</p>";
+	        }*/
+	        $operation = func_get_arg(0);
+	        $sum = '';
+	        switch ($operation) 
+    		{
+    			case '+':
+    				echo func_get_arg(1);
+    				$sum = func_get_arg(1);
+	    				for ($value = 2; $value < func_num_args(); $value++)
+	    				{ 
+	    					echo " + " . func_get_arg($value);
+	    					$sum += func_get_arg($value);
+	    				}
+    				echo " = " . $sum;
+    				break;
+				case '-':
+    				echo func_get_arg(1);
+    				$sum = func_get_arg(1);
+    				for ($value = 2; $value < func_num_args(); $value++)
+    				{ 
+    					echo " - " . func_get_arg($value);
+    					$sum -= func_get_arg($value);
+    				}
+    				echo " = " . $sum;
+    				break;
+    			case '*':
+    				echo func_get_arg(1);
+    				$sum = func_get_arg(1);
+    				for ($value = 2; $value < func_num_args(); $value++)
+    				{ 
+    					echo " * " . func_get_arg($value);
+    					$sum *= func_get_arg($value);
+    				}
+    				echo " = " . $sum;
+    				break;
+    			case '/':
+    				echo func_get_arg(1);
+    				$sum = func_get_arg(1);
+					for ($value = 2; $value < func_num_args(); $value++)
+    				{ 
+    					echo " / " . func_get_arg($value);
+    					$sum /= func_get_arg($value);
+    				}
+    				echo " = " . $sum;
+    				break;
+    			default:
+    				echo "Операция неправильно";
+    				break;
+    		}
+			
+
 }
 // Задание #4 ---------------------------------------------------------------
 /*Функция должна принимать два параметра – целые числа. 
@@ -154,9 +208,11 @@ function task5($a)
 */
 function task6()
 {
-	echo date('d-m-Y H:i');
+	echo date('d.m.Y H:i');
 	echo "<br>";
-	echo date('Y-m-d H:i:s', time()).'<br>';
+	
+	echo date ("d.m.Y H:i:s", mktime (0,0,0,2,24,2016));
+	echo "<br>"; 
 }
 // Задание #7 ---------------------------------------------------------------
 /*Дана строка: “Карл у Клары украл Кораллы”. удалить из этой строки все заглавные буквы “К”.
