@@ -18,14 +18,22 @@ foreach($rows as $data)
 {
 	$user_id = $data['id'];
 }
+	if($rows == null)
+	{
+		$stmt = $db->prepare("INSERT INTO users (name, email, phone) VALUES (:name, :email, :phone)");
+		$stmt->bindParam(':name', $name);
+		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':phone', $phone);
+		$res = $stmt->execute();
+		$user_id = $db->lastInsertId();
+}
 
-if($rows != null)
-{
 	$stmt = $db->prepare("INSERT INTO orders (user_id, address) VALUES (:user_id, :address)");
-	$stmt->bindParam(':user_id', $user_id);
-	$stmt->bindParam(':address', $address);
+	$stmt->bindValue(':user_id', $user_id);
+	$stmt->bindValue(':address', $address);
 	$res = $stmt->execute();
 	$id = $db->lastInsertId();
+
 
 	$count=$db->query("SELECT COUNT(*) FROM orders WHERE user_id=$user_id")->fetchColumn();
 	
@@ -45,8 +53,3 @@ if($rows != null)
 	mail($to, $subject, $message, $headers);
 	}
 	echo "Спасибо, ваш заказ принят!";
-}
-else
-{
-	header('Location: register.php');
-}
