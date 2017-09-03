@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Models\User;
 use App\Models\Register;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class RegisterController
 {
@@ -65,6 +67,7 @@ class RegisterController
 		    $photoname = 'templates/img/'.$_FILES['photo']['name'];
 		    copy($_FILES['photo']['tmp_name'], $photoname);
 		    Register::add_user($data['login'],$data['pass1'],$data['name'],$data['born'],$data['descr'],$photoname);
+		    $this->sendmail($data['login'],$data['name'],$data['email']);
 		    $success = true;
 		  }
 		
@@ -72,5 +75,35 @@ class RegisterController
 		echo $view->generate('reg.php', array('title'=>'Регистрация','errors'=>array_shift($errors),'data'=>$data, 'success'=>$success));
 		}
 		
+	}
+
+	public function sendmail($login,$name,$email)
+	{
+		$mail = new PHPMailer(true);
+		try {
+		    //Server settings
+		    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+		    $mail->isSMTP();                                      // Set mailer to use SMTP
+		    $mail->Host = 'smtp.yandex.ru';  // Specify main and backup SMTP servers
+		    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+		    $mail->Username = 'test.loft2017@yandex.ru';                 // SMTP username
+		    $mail->Password = 'proger2017';                           // SMTP password
+		    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption
+		    $mail->Port = 465;                                    // TCP port to connect to
+		    $mail->CharSet = 'UTF-8';
+		    //Recipients
+		    $mail->setFrom('test.loft2017@yandex.ru', 'Mailer');
+		    $mail->addAddress($email, $name);     // Add a recipient\
+
+		    //Content
+		    $mail->isHTML(true);                                  // Set email format to HTML
+		    $mail->Subject = 'Спасибо за регистрацию на нашем сайте';
+		    $mail->Body    = "Спасибо за регистрацию на нашем сайте. Ваш логин: $login</b>";
+
+		    $mail->send();
+		} catch (Exception $e) {
+		    echo 'Невозможно отправить почта.';
+		    echo 'Ошибка: ' . $mail->ErrorInfo;
+		}
 	}
 }

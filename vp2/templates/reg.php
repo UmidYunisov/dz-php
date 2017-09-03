@@ -16,7 +16,7 @@
         </div>
         {% endif %}
           <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Логин</label>
+            <label for="inputLogin" class="col-sm-2 control-label">Логин</label>
             <div class="col-sm-10">
               <input type="text" name="login" class="form-control" id="inputEmail3" placeholder="{{ data.login }}">
             </div>
@@ -34,25 +34,31 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Имя</label>
+            <label for="inputName" class="col-sm-2 control-label">Имя</label>
             <div class="col-sm-10">
               <input type="text" name="name" class="form-control" id="inputText1" placeholder="{{ data.name }}">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Дата рождения</label>
+            <label for="inputEmail" class="col-sm-2 control-label">E-mail</label>
+            <div class="col-sm-10">
+              <input type="text" name="email" class="form-control" id="inputText1" placeholder="{{ data.email }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDate" class="col-sm-2 control-label">Дата рождения</label>
             <div class="col-sm-10">
               <input type="date" name="born" class="form-control" id="inputDate" placeholder="">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Описания</label>
+            <label for="inputDesc" class="col-sm-2 control-label">Описания</label>
             <div class="col-sm-10">
               <input type="text" name="descr" class="form-control" id="inputText2" placeholder="{{ data.descr }}">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Фото</label>
+            <label for="inputPhoto" class="col-sm-2 control-label">Фото</label>
             <div class="col-sm-10">
               <input type="file" name="photo" multiple accept="image/*,image/jpeg">
             </div>
