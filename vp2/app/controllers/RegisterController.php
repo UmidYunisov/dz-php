@@ -64,11 +64,22 @@ class RegisterController
 
 		  if(empty($errors))
 		  {
-		    $photoname = 'templates/img/'.$_FILES['photo']['name'];
-		    copy($_FILES['photo']['tmp_name'], $photoname);
-		    Register::add_user($data['login'],$data['pass1'],$data['name'],$data['born'],$data['descr'],$photoname);
-		    $this->sendmail($data['login'],$data['name'],$data['email']);
-		    $success = true;
+		  	$remoteIp = $_SERVER['REMOTE_ADDR'];
+			$gRecaptchaResponse = $_REQUEST['g-recaptcha-response'];
+			$recaptcha = new \ReCaptcha\ReCaptcha("6Ld0Uy8UAAAAAGRhfm55LN41j4P6JjGmqcjeK1xD");
+			$resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
+			if ($resp->isSuccess()) 
+			{
+			    $photoname = 'templates/img/'.$_FILES['photo']['name'];
+			    copy($_FILES['photo']['tmp_name'], $photoname);
+			    Register::add_user($data['login'],$data['pass1'],$data['name'],$data['born'],$data['descr'],$photoname);
+			    $this->sendmail($data['login'],$data['name'],$data['email']);
+			    $success = true;
+			} 
+			else
+			{
+			   $errors[] = "Ошибка в рекапче";
+			}
 		  }
 		
 		$view = new View();

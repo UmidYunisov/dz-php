@@ -64,6 +64,9 @@
             </div>
           </div>
           <div class="form-group">
+          <div class="g-recaptcha" data-sitekey="6Ld0Uy8UAAAAAFgLFG87pzhee9AwJ_6mlmpG_N8a"></div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" name="submit" class="btn btn-default">Зарегистрироваться</button>
               <br><br>

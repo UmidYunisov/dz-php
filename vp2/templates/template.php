@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <title>{{ title }}</title>
 
     <!-- Bootstrap core CSS -->
