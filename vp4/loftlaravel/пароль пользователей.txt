@@ -1,0 +1,8 @@
+Администратор
+Login: admin@loft.loc
+Pas:   password
+
+
+Пользователь
+Login:  user@loft.loc
+Pass:   password
